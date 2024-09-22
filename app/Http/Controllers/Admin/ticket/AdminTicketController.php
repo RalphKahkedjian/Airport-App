@@ -13,7 +13,7 @@ class AdminTicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::paginate(4);
+        $tickets = Ticket::paginate(100);
         return response()->json($tickets);
     }
 
