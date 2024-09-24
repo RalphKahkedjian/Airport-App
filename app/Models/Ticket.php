@@ -15,6 +15,7 @@ class Ticket extends Model
         'flight_number',
         'seat_number',
         'price',
+        'spots',
         'departure_time',
         'arrival_time',
         'status',
