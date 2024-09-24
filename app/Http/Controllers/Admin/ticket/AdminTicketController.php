@@ -28,6 +28,7 @@ class AdminTicketController extends Controller
             'flight_number' => 'required|string',
             'seat_number' => 'required|string',
             'price' => 'required|numeric',
+            'spots' => 'required|integer',
             'departure_time' => 'required|date',
             'arrival_time' => 'required|date',
             'status' => 'required|in:available,booked',
@@ -44,6 +45,7 @@ class AdminTicketController extends Controller
         $new_ticket->flight_number = $request->flight_number;
         $new_ticket->seat_number = $request->seat_number;
         $new_ticket->price = $request->price;
+        $new_ticket->spots = $request->spots;
         $new_ticket->departure_time = $request->departure_time;
         $new_ticket->arrival_time = $request->arrival_time;
         $new_ticket->status = $request->status;

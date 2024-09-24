@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\Admin\auth\AdminAuthController;
 use App\Http\Controllers\Admin\admin\AdminController;
 use App\Http\Controllers\Admin\book\AdminBookingController;
@@ -40,15 +41,16 @@ use App\Http\Controllers\User\ticket\UserTicketContoller;
     Route::put('/Admin/ticket/{id}', [AdminTicketController::class, 'update']);
     Route::delete('/Admin/ticket/{id}', [AdminTicketController::class, 'destroy']);
 
-// Admin routes for managing admins
-Route::middleware(['auth:admin'])->group(function () {
-
-    // Admin routes for managing users
     Route::get('/Admin/user', [AdminUserController::class, 'index']);
     Route::post('/Admin/user', [AdminUserController::class, 'store']);
     Route::get('/Admin/user/{id}', [AdminUserController::class, 'show']);
     Route::put('/Admin/user/{id}', [AdminUserController::class, 'update']);
     Route::delete('/Admin/user/{id}', [AdminUserController::class, 'destroy']);
+
+// Admin routes for managing admins
+Route::middleware(['auth:admin'])->group(function () {
+
+    // Admin routes for managing users
 
     // Admin routes for managing tickets
 
@@ -64,6 +66,11 @@ Route::middleware(['auth:admin'])->group(function () {
 
 Route::put('/User/auth', [UserAuthConroller::class, 'register']);
 Route::post('/User/auth', [UserAuthConroller::class, 'login']);
+
+Route::delete('/User/auth/{id}', [UserAuthConroller::class, 'deleteUser']);
+
+Route::delete('/User/user/{id}', [UserController::class, 'destroy']);
+
 Route::get('/User/ticket',[UserTicketContoller::class,'index']);
 Route::get('/User/ticket/{id}',[UserTicketContoller::class,'show']);
 

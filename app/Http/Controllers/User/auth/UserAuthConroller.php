@@ -57,6 +57,23 @@ class UserAuthConroller extends Controller
     }
 
 
+    public function deleteUser($id) // Fixed method parameter syntax
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            $user->delete();
+            return response()->json([
+                'status' => true,
+                'message' => 'User deleted successfully'
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not found'
+            ], 404);
+        }
+    }
 
 
 

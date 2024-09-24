@@ -108,7 +108,7 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        $searchadmin = Admin::findorfail($id);
+        $searchadmin = Admin::find($id);
         if ($searchadmin)
         {
             $searchadmin->delete();
