@@ -66,10 +66,7 @@ Route::middleware(['auth:admin'])->group(function () {
 
 Route::put('/User/auth', [UserAuthConroller::class, 'register']);
 Route::post('/User/auth', [UserAuthConroller::class, 'login']);
-
 Route::delete('/User/auth/{id}', [UserAuthConroller::class, 'deleteUser']);
-
-Route::delete('/User/user/{id}', [UserController::class, 'destroy']);
 
 Route::get('/User/ticket',[UserTicketContoller::class,'index']);
 Route::get('/User/ticket/{id}',[UserTicketContoller::class,'show']);
