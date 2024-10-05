@@ -35,7 +35,6 @@ class AdminBookingController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer|exists:users,id',
             'ticket_id' => 'required|integer|exists:tickets,id',
-            'booking_date' => 'required|date', // Validate booking date
         ]);
 
         // Validate the form data
@@ -51,7 +50,6 @@ class AdminBookingController extends Controller
         $booking = new Booking();
         $booking-> user_id = $request->user_id;
         $booking-> ticket_id = $request->ticket_id;
-        $booking->booking_date = $request->booking_date; 
         $booking->status = 'booked';
         $booking ->save();
 

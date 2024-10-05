@@ -12,15 +12,14 @@ class Booking extends Model
     [
         'user_id',
         'ticket_id',
-        'booking_date',
+        'quantity'
     ];
-    // vise_verse the user-booking function in user model
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // each booking belong to one ticket 
     public function ticket()
     {
         return $this->belongsTo(Ticket::class);

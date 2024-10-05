@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\auth\AdminAuthController;
 use App\Http\Controllers\Admin\admin\AdminController;
 use App\Http\Controllers\Admin\book\AdminBookingController;
+use App\Http\Controllers\User\book\UserBookingController;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,19 +48,14 @@ use App\Http\Controllers\User\ticket\UserTicketContoller;
     Route::put('/Admin/user/{id}', [AdminUserController::class, 'update']);
     Route::delete('/Admin/user/{id}', [AdminUserController::class, 'destroy']);
 
-// Admin routes for managing admins
-Route::middleware(['auth:admin'])->group(function () {
-
-    // Admin routes for managing users
-
-    // Admin routes for managing tickets
-
-    // Admin routes for managing bookings
     Route::get('/Admin/book', [AdminBookingController::class, 'index']);
     Route::post('/Admin/book', [AdminBookingController::class, 'store']);
     Route::get('/Admin/book/{id}', [AdminBookingController::class, 'show']);
     Route::put('/Admin/book/{id}', [AdminBookingController::class, 'update']);
     Route::delete('/Admin/book/{id}', [AdminBookingController::class, 'destroy']);
+
+// Admin routes for managing admins
+Route::middleware(['auth:admin'])->group(function () {
 });
 
 // User authentication routes
@@ -71,7 +67,9 @@ Route::delete('/User/auth/{id}', [UserAuthConroller::class, 'deleteUser']);
 Route::get('/User/ticket',[UserTicketContoller::class,'index']);
 Route::get('/User/ticket/{id}',[UserTicketContoller::class,'show']);
 
-Route::middleware(['auth:user'])->group(function () {
 
+Route::post('/User/book', [UserBookingController::class, 'store']);
+
+Route::middleware(['auth:user'])->group(function () {
 });
 
