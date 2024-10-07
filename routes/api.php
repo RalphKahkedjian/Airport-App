@@ -69,6 +69,8 @@ Route::get('/User/ticket/{id}',[UserTicketContoller::class,'show']);
 
 
 Route::post('/User/book', [UserBookingController::class, 'store']);
+Route::get('/User/book/{userId}', [UserBookingController::class, 'show']);
+Route::delete('/User/book/{id}', [UserBookingController::class, 'destroy']);
 
 Route::middleware(['auth:user'])->group(function () {
 });

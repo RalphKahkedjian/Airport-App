@@ -86,22 +86,21 @@ class UserBookingController extends Controller
     /**
      * Display the specified booking of the authenticated user.
      */
-    public function show(string $id, Request $request)
+    public function show(string $userId)
     {
-        $booking = Booking::where('id', $id)
-            ->where('user_id', $request->user()->id)
-            ->first();
-
-        if (!$booking) {
+        // Fetch bookings for the specified user ID
+        $bookings = Booking::where('user_id', $userId)->get();
+    
+        if ($bookings->isEmpty()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Booking not found or does not belong to the user',
-            ], 404);
+                'message' => 'No bookings found for this user.',
+            ], 404); // Return 404 Not Found
         }
-
-        return response()->json($booking);
+    
+        return response()->json($bookings);
     }
-
+    
     /**
      * Update the specified booking for the user.
      */
