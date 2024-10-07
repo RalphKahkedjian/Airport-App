@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 use App\Http\Controllers\Admin\auth\AdminAuthController;
@@ -75,3 +76,5 @@ Route::delete('/User/book/{id}', [UserBookingController::class, 'destroy']);
 Route::middleware(['auth:user'])->group(function () {
 });
 
+=======
+>>>>>>> 9890a2c61fa65dac7588ef8503d6a27e1f55ce33
