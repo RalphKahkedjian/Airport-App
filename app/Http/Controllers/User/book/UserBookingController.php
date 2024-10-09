@@ -157,29 +157,40 @@ class UserBookingController extends Controller
         }
     }
 
-    /**
-     * Remove the specified booking for the user.
-     */
-    public function destroy(string $id, Request $request)
-    {
-        $booking = Booking::where('id', $id)
-            ->where('user_id', $request->user()->id)
-            ->first();
+public function destroy(string $id, Request $request)
+{
 
-        if (!$booking) {
-            return response()->json(['error' => 'Booking not found or not authorized.'], 404);
-        }
-        $ticket = Ticket::find($booking->ticket_id);
-        if ($ticket) {
-            $ticket->status = 'available';
-            $ticket->save();
-        }
+    $userId = $request->input('user_id');
 
-        $booking->delete();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Booking deleted successfully',
-        ]);
+    if (!$userId) {
+        return response()->json(['error' => 'User ID is required.'], 400);
     }
+
+    $booking = Booking::where('id', $id)
+        ->where('user_id', $userId)
+        ->first();
+
+    if (!$booking) {
+        return response()->json(['error' => 'Booking not found or not authorized.'], 404);
+    }
+
+    $ticket = Ticket::find($booking->ticket_id);
+    if ($ticket) {
+        $ticket->spots += $booking->quantity;
+        if ($ticket->spots > 0) {
+            $ticket->status = 'available';
+        }
+        $ticket->save();
+    }
+
+    $booking->delete();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Booking deleted successfully',
+        'ticket' => $ticket,
+    ]);
+}
+
+    
 }
